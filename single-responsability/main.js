@@ -1,3 +1,5 @@
+import logMessage from "./logger";
+
 class KilometerTracker {
   constructor(maxKilometers) {
     this.maxKilometers = maxKilometers;
@@ -7,13 +9,15 @@ class KilometerTracker {
   trackKilometers(kilometerCount) {
     this.currentKilometers += kilometerCount;
     if (this.currentKilometers > this.maxKilometers) {
-      this.logFuel();
+      logMessage("No more Fuel");
     }
   }
 
-  logFuel() {
-    console.log("No more fuel");
-  }
+  // Single responsability principle is followed. KilometerTrack has now one reason to change.
+  // The only reason we have to change the tracker, is if we want to enhance with more logic in example
+  // The only reason we have to change the logger, is if we want to send an email instead a simple console.log in example
+  // Now, each section of code have one single reason to change
+  // The main benefit of the single responsability is that the code is much easier to follow or read
 }
 
 const kilometerTracker = new KilometerTracker(2000);
